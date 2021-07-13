@@ -1,17 +1,14 @@
 //Obtener desde el localstorage
-const obtenerContactos = (filtro=null)=>{
+const obtenerContactos = async (filtro=null)=>{
 
-    let lista = localStorage.getItem("contactos");
-    if(lista){
-        lista = JSON.parse(lista);
-    }
-    else{
-        lista = [];
-    }
+    let lista = null;
 
-    //filtro
-    if(filtro != null){
-        lista = lista.filter(i=> i.nombre.includes(filtro) || i.correo.includes(filtro) || i.telefono.includes(filtro));
+    if(filtro == null){
+        let res = await axios.get("http://localhost:8080/contactos");
+        lista = res.data;
+    }else{
+        let res = await axios.get(`http://localhost:8080/contactos/${filtro}`);
+        lista = res.data;
     }
 
     return lista;
@@ -19,9 +16,7 @@ const obtenerContactos = (filtro=null)=>{
 };
 
 //Agregar contactos al localstorage
-const agregarContactos = (contacto)=>{
-
-    let lista = obtenerContactos();
-    lista.push(contacto);
-    localStorage.setItem("contactos", JSON.stringify(lista));
+const agregarContactos = async (contacto)=>{
+    
+    await axios.post("http://localhost:8080/contactos", contacto);
 };

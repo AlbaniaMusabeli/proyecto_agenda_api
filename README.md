@@ -17,5 +17,13 @@ npm install --save body-parser
 npm install --save sequelize
 npm install --save mysql2
 npm install --save cors
+npm install --save -g sequelize-cli
+```
 
+_Crear modelo para tabla Contactos_
+
+```
+sequelize model:create --name contacto --attributes nombre:string,correo:string,telefono:string
+
+sequelize bd:migrate
 ```

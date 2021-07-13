@@ -1,4 +1,4 @@
-document.querySelector("#registrar-btn").addEventListener("click", ()=>{
+document.querySelector("#registrar-btn").addEventListener("click", async ()=>{
 
     let nombre = document.querySelector("#nombre-txt").value.trim();
     let correo = document.querySelector("#correo-txt").value.trim();
@@ -6,7 +6,7 @@ document.querySelector("#registrar-btn").addEventListener("click", ()=>{
 
     let objeto = {nombre:nombre, correo:correo, telefono:telefono};
 
-    agregarContactos(objeto);
+    await agregarContactos(objeto);
 
     Swal.fire(
         'Guardado',
